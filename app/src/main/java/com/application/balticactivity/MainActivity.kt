@@ -3,8 +3,6 @@ package com.application.balticactivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-//import com.application.balticactivity.BuildConfig
-//import com.application.balticactivity.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
