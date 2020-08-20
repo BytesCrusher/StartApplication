@@ -1,5 +1,5 @@
 package com.application.balticactivity
-
+//Array - количество элементов не может изменяться
 fun main() {
     val array = arrayOf("Петров", "Котин", "Скотин", "Страшный", "Калистый") + arrayOf("Сколеистый")
 

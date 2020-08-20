@@ -1,5 +1,5 @@
 package com.application.balticactivity
-
+//set - множество, элементы не повторяются
 fun main() {
     //неизменяемые множества
     val immutableSet = setOf(1, 2, 3, 4, 5, 6, 7, 8, 2)

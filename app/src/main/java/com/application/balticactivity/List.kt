@@ -1,5 +1,5 @@
 package com.application.balticactivity
-
+//List - список, количество элементов может изменяться
 fun main() {
     val immutableList = listOf("1", "2", "3")//неизменяемый список, элементы нельзя изменить
     val mutableList = mutableListOf("1", "2", "3", "4")//изменяемый список
