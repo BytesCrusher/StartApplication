@@ -6,10 +6,15 @@ fun main() {
     //если в if есть else, то это выражениие
     val a = if (true) 4 else 0
 
-    //принимает нул, если не соответсвует тому, что написано в takeIf, иначе не нул
+    val g = when {
+        false -> "test"
+        else -> "else"
+    }
+
+    //takeIf принимает значение нул, если не соответсвует тому, что написано в takeIf, иначе не нул
     calculateRandomInt()
         .takeIf { it>4 }
-    //после этого надо использовать safe call
+        //после этого надо использовать safe call, т.к. возможен null
         ?.let { println("number is greater than 4") }
 
 }
