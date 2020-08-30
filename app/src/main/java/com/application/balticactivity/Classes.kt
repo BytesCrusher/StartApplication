@@ -1,23 +1,52 @@
 package com.application.balticactivity
 
-import com.application.balticactivity.oop.Airplane
-import com.application.balticactivity.oop.Car//импорт класса
-import com.application.balticactivity.oop.Vehicle
+import com.application.balticactivity.oop.*
 
 fun main() {
+//Анонимный класс
+    //можно использовать только внутри этого блока кода, где он создан
+    val shape = object :Shape {
+        var additionalField = 123
+        fun additionalFunction() = 234
+
+        override val name: String = "anonimous shape"
+
+        override fun calculateArea(): Double = 0.0
+        }
+    shape.additionalField = 6564
+//\Анонимный класс
+
+//Абстрактный Класс
+//    val shape = Rectangle(1, 5, 2, 2)
+//    shape.printPosition()
+//    shape.moveToPosition(3,6)
+//
+//    println("Shape with area: ${shape.calculateArea()}")
+//    println("Shape with area: ${shape.name}")
+//
+//    //сравнение прямоугольников
+//    val largeRectangle = Rectangle(1,1,20,50)
+//    println("shape <= largeRectangle (${shape <= largeRectangle})")
+//
+//    val set: MutableSet<Rectangle> =  hashSetOf(
+//        largeRectangle,
+//        shape
+//    )
+//
+//    println(set)
+//\Абстрактный Класс
+
 //Полиморфизм
-    val vehicle: Vehicle = Car(wheelCount = 4, doorCount = 2, maxSpeed = 180)
-    println(vehicle.getTitle())
-
-    listOf<Vehicle>(
-        Vehicle(maxSpeed = 120),
-        Car(wheelCount = 4, doorCount = 2, maxSpeed = 175),
-        Airplane(maxSpeed = 900)
-    ).forEach{
-        println(it.getTitle())
-    }
-
-
+//    val vehicle: Vehicle = Car(wheelCount = 4, doorCount = 2, maxSpeed = 180)
+//    println(vehicle.getTitle())
+//
+//    listOf<Vehicle>(
+//        Vehicle(maxSpeed = 120),
+//        Car(wheelCount = 4, doorCount = 2, maxSpeed = 175),
+//        Airplane(maxSpeed = 900)
+//    ).forEach{
+//        println(it.getTitle())
+//    }
 //\Полиморфизм
 
 //    val tesla = Car(wheelCount = 4, doorCount = 2, maxSpeed = 180)
