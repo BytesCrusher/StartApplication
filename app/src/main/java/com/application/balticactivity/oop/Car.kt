@@ -1,75 +1,46 @@
 package com.application.balticactivity.oop
 
-//open говорит что это не окончательный класс
-open class Car(//это будет инициализироваться при создании класса, основной конструктор
-    val wheelCount: Int,
-    val doorCount: Int,
-    val bodyLenght: Int,
-    val bodyWidth: Int,
-    val bodyHeight: Int
-) {
-//    init {//блок, который выполняет действия в момент, когда в класс поступают данные, чтобы произвести с ними операции. можно много init
-//        println("Car init")
-//    }
+class Car(
+    val wheelCount:Int,
+    val doorCount:Int,
+    maxSpeed:Int
+    ) : Vehicle(maxSpeed = 100) {
 
-    var currentSpeed:Int = 0
-        get() {
-            println("current speed get")
-            return field//свойство хранит значение, доступное field. Backing field
+    var isDoorOpen:Boolean = false
+        private set
+
+    fun openDoor(){
+        if(!isDoorOpen){
+            println("door is open")
         }
-        private set(value) {
-            println("current speed set $value")
-            field = value
+        isDoorOpen = true
+    }
+
+    fun closeDoor(){
+        if(isDoorOpen){
+            println("door is closed")
         }
+        isDoorOpen = false
+    }
 
-    //можно обратиться к полю для чтения, но нельзя для установки значения
-    var fuelCount:Int = 70
-        private set //просто делаем приватным set
-
-//определим геттером свойтво так, чтобы можно было получить нужное значение, но нельзя было его поменять
-    val isStoped:Boolean
-        get() = currentSpeed == 0
-
-//дополнительный конструктор
-// здесь мы вызываем основной конструктор с помощью this и передаем туда параметры, которые он ожидает
-    //доп конструктор уже может иметь тело, где можно выполнять действия
-    //сначала будет вызван основной конструктор, затем блоки init, а затем код, который здесь написан будет
-
-//    constructor(wheelCount: Int, doorCount: Int, bodySize: Triple<Int, Int, Int>):this(wheelCount, doorCount, bodySize.first, bodySize.second, bodySize.third) {
-//        println("Car secondary constructor")
-//    }
-
-    //методы
-    //this - это как self в питончике
-    fun accelerate(speed:Int) {
-
-        val needFuel = speed/2
-        if (fuelCount>=needFuel){
-            currentSpeed += speed
-            useFuel(needFuel)
+    //переопределяем метод accelerate из родительского класса
+    override fun accelerate(speed: Int) {
+        if (isDoorOpen){
+            println("you cant accelerate while door is open")
         } else {
-            println("Невозможно ускориться! Нет топлива!")
+            super.accelerate(speed)//вызываем реализацию этого метода у родительского класса
         }
     }
 
-    fun decelerate(speed: Int) {
-        currentSpeed = maxOf(0, currentSpeed - speed)
-    }
+    override fun getTitle(): String = "Car"
 
-    private fun useFuel(fuelCount:Int) {
-        this.fuelCount -= fuelCount
-    }
-
-    fun refuel(fuelCount:Int) {
-        if (currentSpeed==0){
-            this.fuelCount += fuelCount
+    //перегрузка операторов
+    fun accelerate(speed: Int, force:Boolean) {
+        if (force){
+            if (isDoorOpen) println("Warning! Door is open!")
+            super.accelerate(speed)//а это вызовет реализацию из класса Vehicle
         } else {
-            println("Заправка невозможна во время движения!")
+            accelerate(speed)//это вызов реализации из класса Car
         }
     }
-
-    fun testmethod(){
-
-    }
-
 }
