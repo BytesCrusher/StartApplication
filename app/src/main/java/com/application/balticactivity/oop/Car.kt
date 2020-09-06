@@ -1,5 +1,8 @@
 package com.application.balticactivity.oop
 
+import com.application.balticactivity.User
+import java.sql.Driver
+
 class Car(
     val wheelCount:Int,
     val doorCount:Int,
@@ -9,6 +12,11 @@ class Car(
     var isDoorOpen:Boolean = false
         private set
 
+//latainit
+    //если не инициализировать водителя до того, как будет использована переменная водителя, то
+    private lateinit var driver: User
+//\latainit
+
     fun openDoor(){
         if(!isDoorOpen){
             println("door is open")
@@ -16,9 +24,14 @@ class Car(
         isDoorOpen = true
     }
 
+//делаем проверку на то, инициализированно ли поле, перед тем, как его использовать, т.к. отложенная инициализация
     fun closeDoor(){
         if(isDoorOpen){
             println("door is closed")
+
+            if(::driver.isInitialized){//проверка перед использование lateinit, ::driver - обращение к свойству
+                println("driver = ${driver}")
+            }
         }
         isDoorOpen = false
     }
@@ -47,6 +60,10 @@ class Car(
         } else {
             accelerate(speed)//это вызов реализации из класса Car
         }
+    }
+
+    fun setDriver(driver: User) {
+        this.driver = driver
     }
 
     //переопределяем методы equals и hashCode
