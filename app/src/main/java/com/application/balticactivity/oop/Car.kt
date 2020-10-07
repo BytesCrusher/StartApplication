@@ -1,5 +1,6 @@
 package com.application.balticactivity.oop
 
+import com.application.balticactivity.Engine
 import com.application.balticactivity.User
 import java.sql.Driver
 
@@ -16,6 +17,12 @@ class Car(
     //если не инициализировать водителя до того, как будет использована переменная водителя, то
     private lateinit var driver: User
 //\latainit
+
+    //ленивая инициализация через делегированные свойства
+    private val engine by lazy {
+        Engine()
+    }
+    //\ленивая инициализация через делегированные свойства
 
     fun openDoor(){
         if(!isDoorOpen){
@@ -38,6 +45,7 @@ class Car(
 
     //переопределяем метод accelerate из родительского класса
     override fun accelerate(speed: Int) {
+        engine.use()
         if (isDoorOpen){
             println("you cant accelerate while door is open")
         } else {

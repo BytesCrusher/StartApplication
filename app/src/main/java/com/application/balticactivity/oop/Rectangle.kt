@@ -1,11 +1,20 @@
 package com.application.balticactivity.oop
 
+import com.application.balticactivity.PrintAreaOnChangeDelegate
+
 class Rectangle(
     x: Int,
     y: Int,
-    private val width:Int,
-    private val height:Int
+    width:Int,
+    height:Int
 ):AbstractShape(x, y), Comparable<Rectangle> {
+
+    //чтобы при изменении ширины и высоты печаталась площадь фигуры
+    //указать делегированное свойство через by
+    var width:Int by PrintAreaOnChangeDelegate(width)
+    var height:Int by PrintAreaOnChangeDelegate(height)
+    //\
+
     override val name: String = "Rectangle"
 
     override fun calculateArea(): Double = width * height.toDouble()
