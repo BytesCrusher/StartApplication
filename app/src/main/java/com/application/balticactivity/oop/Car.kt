@@ -95,5 +95,20 @@ class Car(
         return result
     }
 
+//компаньоны companion object
+//описываются в самом конце класса
+//внутри класса может быть только один компаньон объект
+
+//Компаньон объекты обычно используются для определения методов либо констант, которые связаны с
+//классом, которые позволят клиентам как-то более удобно работать с классом
+//это статические методы, т.к. мы можем получить доступ к методу createWithDefaultWheelCount
+//без создания объекты класса Car
+    companion object {
+        val default = Car(wheelCount = 4, doorCount = 2, maxSpeed = 150)
+    fun createWithDefaultWheelCount(doorCount: Int, maxSpeed: Int):Car {
+        return Car(wheelCount = 4, doorCount = doorCount, maxSpeed = maxSpeed)
+    }
+    }
+
 
 }
