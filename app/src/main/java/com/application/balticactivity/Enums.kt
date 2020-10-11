@@ -34,6 +34,13 @@ fun main() {
     val searchingName = "3253"
     println("Используем fromName для $searchingName: ${Color.fromName(searchingName)}")
 
+
+//Sealed Class SealedColor.kt
+//не можем создать объект sealed color, т.к. sealed class и нельзя создать его объект
+//можем создавать объекты только наследников, либо использовать объект синглтон из Sealed class
+    SealedColor.Black
+    SealedColor.CustomColor("#f0f")
+
 }
 
 //Работа с enum внутри when
@@ -48,5 +55,20 @@ fun invertColor(color:Color):Color{
         Color.RED -> Color.BLUE
         Color.BLUE -> Color.RED
 
+    }
+}
+
+fun invertColorWithSealedClass(color:SealedColor): SealedColor {
+    //проверим через when какого цвета наш объект типа Color и предоставить инвертированный цвет
+    //здесь не нужна ветка else, т.к. у нас строго задано множество объектов, которые могут быть
+    //При работе с перечислениями нужно указывать все варианты без else, т.к. это может привести
+    // к ошибкам при добавлении еще элементов в enum
+    return when(color) {
+        SealedColor.Black -> SealedColor.White
+        SealedColor.White -> SealedColor.Black
+        is SealedColor.CustomColor -> {
+            SealedColor.White
+        }
+        //else не надо, т.к. известны все наследники во время компиляции кода
     }
 }
