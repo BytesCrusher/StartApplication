@@ -30,4 +30,14 @@ class Rectangle(
         return "Rectangle(width = $width, height = $height)"
     }
 
+//перегрузка оператора, чтобы можно было складывать два прямоугольника
+    operator fun plus(other: Rectangle):Rectangle {
+        return Rectangle(0,0,width+other.width, height+other.height)
+    }
+
+//перегрузка унарного оператора минус, чтобы получать значения прямоугольника со знаком минус
+    operator fun unaryMinus():Rectangle {
+        return Rectangle(0,0,-width, -height)
+}
+
 }
