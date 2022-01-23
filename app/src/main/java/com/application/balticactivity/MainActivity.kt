@@ -2,10 +2,12 @@ package com.application.balticactivity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.EditText
-import android.widget.TextView
+import android.view.View
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,9 +15,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)//передача ресурса разметки
 
-        val nameInput = findViewById<EditText>(R.id.nameInput)//найдем инпут
-        val nameTextView = findViewById<TextView>(R.id.nameText)//найдем текст вью элемент
 
+        clearButton.setOnClickListener {
+            nameInput.setText("")
+            Toast.makeText(this, R.string.cleared_text, Toast.LENGTH_SHORT).show()
+        }
+
+        //листинер на изменение текста в поле ввода
         nameInput.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -23,34 +29,34 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 //будем изменять строку только если пользователь что-то ввел
-                nameTextView.text = p0?.takeIf { it.isNotBlank() }?.let { name -> resources.getString(R.string.hello_string, name) }
+                nameText.text = p0?.takeIf { it.isNotBlank() }
+                    ?.let { name -> resources.getString(R.string.hello_string, name) }
+
+                //обращаемся к строке, если она не нул, то вызываем метод
+                // из нот эмпти и результат из нее проверяем не пусто ли оно
+                clearButton.isEnabled = p0?.let{it.isNotEmpty()} ?: false
             }
 
             override fun afterTextChanged(p0: Editable?) {
 
             }
 
-        })//листинер на изменение текста в поле ввода
+        })
 
-        //чтобы найти вью сделаем поиск элемента разметки по его айди
+        makeLongOperationButton.setOnClickListener{
+            makeLongOperation()
+        }
+    }
 
-        //поиск элемента типа TextView который имеет айди textView
-        /*val textView = findViewById<TextView>(R.id.textView)
-        textView.text = "new Text"
-        textView.setText(R.string.app_name)
-
-        val text = resources.getString(R.string.text_view)*/
-
-        /*
-        это чтобы показать на экране информацию о собранном приложении
-        val textView = findViewById<TextView>(R.id.textView)
-        textView.text = """
-            BuildType=${BuildConfig.BUILD_TYPE}
-            flavor=${BuildConfig.FLAVOR}
-            VersionCode = ${BuildConfig.VERSION_CODE}
-            VersionName = ${BuildConfig.VERSION_NAME}
-            ApplicationId = ${BuildConfig.APPLICATION_ID}
-        """*/
+    private fun makeLongOperation() {
+        longOperationProgress.visibility = View.VISIBLE
+        makeLongOperationButton.isEnabled = false
+        //выполнить действие спустя заданное время
+        Handler().postDelayed({
+            longOperationProgress.visibility = View.GONE
+            makeLongOperationButton.isEnabled = true
+            Toast.makeText(this,R.string.long_operation_complete, Toast.LENGTH_SHORT).show()
+        }, 2000)
     }
 
     /*override fun onResume() {//пользователь сможет взаимодействовать с экраном

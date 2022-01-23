@@ -3,4 +3,8 @@
     <string name="text_view">Text view</string>
     <string name="name_hint">Введите свое имя</string>
     <string name="hello_string">Привет, %1$s</string>
+    <string name="clear_text_button">Очистить</string>
+    <string name="cleared_text">Текст был очищен</string>
+    <string name="makeLongOperation">Совершить долгую операцию</string>
+    <string name="long_operation_complete">Операция завершена</string>
 </resources>
