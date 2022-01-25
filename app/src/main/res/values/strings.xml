@@ -7,4 +7,6 @@
     <string name="cleared_text">Текст был очищен</string>
     <string name="makeLongOperation">Совершить долгую операцию</string>
     <string name="long_operation_complete">Операция завершена</string>
+    <string name="enter_text">Введите текст</string>
+    <string name="add_text_button">Добавить</string>
 </resources>
